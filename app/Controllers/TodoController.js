@@ -1,12 +1,26 @@
 import todoService from "../Services/TodoService.js";
+import { ProxyState } from "../AppState.js"
 
-//TODO Create the draw function
-function _drawTodos() { }
+function _drawTodos() {
+  let todos = ProxyState.todos;
+  let completeCount = 0;
+  let template = ''
+  todos.forEach(todo => {
+    template += todo.Template;
+    if(todo.completed)
+    {
+      completeCount++;
+    }
+  })
+  document.getElementById('todosDivList').innerHTML = template ;
+  document.getElementById('completeDiv').innerHTML = `${completeCount}/${todos.length}`;
+ }
 
 export default class TodoController {
   constructor() {
-    //TODO Remember to register your subscribers
-    todoService.getTodos();
+    ProxyState.on("todos", _drawTodos);
+    _drawTodos();
+    this.getTodos();
   }
 
   getTodos() {
@@ -16,16 +30,24 @@ export default class TodoController {
       console.error(error)
     }
   }
-  addTodo(e) {
-    e.preventDefault();
-    var form = e.target;
-    //TODO build the todo object from the data that comes into this method
-    var todo = {};
+
+  addTodo() {
+    window.event.preventDefault();
+    let form = window.event.target
+    var todo = {
+      description: form['description'].value,
+      completed: false,
+      user: "timzaleski"
+    };
     try {
       todoService.addTodo(todo);
     } catch (error) {
       console.error(error)
     }
+     // @ts-ignore
+     form.reset();
+     // @ts-ignore
+     $("#new-todo-modal").modal('hide');
   }
 
   /**

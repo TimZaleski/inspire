@@ -21,10 +21,49 @@
             <div class="bottomMiddleAuthor" id="authorDiv"></div>
             <div class="centerMiddle" id="clockDiv" onclick="app.clockController.switchClock()"></div>
             <div class="bottomLeft" id="imageInfoDiv">
-                Font Color<input type="color" id="color" name="color" value="#FFFFFF" onchange="app.clockController.ChangeColor(this)">
+                Font Color<input type="color" id="color" name="color" value="#000000" onchange="app.clockController.ChangeColor(this)">
             </div>
+            <div class="bottomRight" id="todoDiv">
+                <div id="completeDiv"></div>
+                <div id="todosDivList"></div>
+                 <!-- Button trigger modal -->
+                 <button type="button" class="btn" data-toggle="modal"
+                 data-target="#new-todo-modal" style="color: white;">New ToDo</button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="new-todo-modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add ToDo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form onsubmit="app.todoController.addTodo()">
+                            <input type="text" id="description" placeholder="description" required>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
     </main>
     
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="app/main.js" type="module"></script>
 </body>
